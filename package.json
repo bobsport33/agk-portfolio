@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@linaria/core": "^6.3.0",
+    "@linaria/react": "^6.3.0",
+    "@wyw-in-js/babel-preset": "^0.8.1",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
