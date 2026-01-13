@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { styled } from "@pigment-css/react";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 
 interface LinkProps {
 	text: string;
@@ -33,10 +35,18 @@ const StyledLink = styled(NextLink)`
 			width: 100%;
 		}
 	}
+
+	&[aria-current="page"]::after {
+		width: 100%;
+	}
 `;
 
 const Link = ({ text, href, color }: LinkProps) => {
 	const isExternal = href.startsWith("http");
+
+	const pathname = usePathname();
+
+	const isActive = pathname === href;
 
 	const style = {
 		...(color && { "--link-color": color }),
@@ -48,6 +58,7 @@ const Link = ({ text, href, color }: LinkProps) => {
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
+				aria-current={isActive ? "page" : undefined}
 				style={style}
 			>
 				{text}
@@ -56,7 +67,11 @@ const Link = ({ text, href, color }: LinkProps) => {
 	}
 
 	return (
-		<StyledLink href={href} style={style}>
+		<StyledLink
+			href={href}
+			aria-current={isActive ? "page" : undefined}
+			style={style}
+		>
 			{text}
 		</StyledLink>
 	);
