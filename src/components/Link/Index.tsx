@@ -7,36 +7,39 @@ interface LinkProps {
 	href: string;
 	target?: string;
 	color?: string;
-	hoverColor?: string;
-	activeColor?: string;
 }
 
 const StyledLink = styled(NextLink)`
 	--link-color: var(--secondary);
-	--link-hover-color: #003bbd;
-	--link-active-color: #002a8f;
-
 	font-size: 1.5rem;
 	color: var(--link-color);
 	text-decoration: none;
 	transition: color 0.2s ease;
+	position: relative;
 
-	&:hover {
-		color: var(--link-hover-color);
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -2px;
+		height: 2px;
+		width: 0;
+		background-color: var(--link-color);
+		transition: width 0.3s;
 	}
 
-	&:active {
-		color: var(--link-active-color);
+	&:hover {
+		&::after {
+			width: 100%;
+		}
 	}
 `;
 
-const Link = ({ text, href, color, hoverColor, activeColor }: LinkProps) => {
+const Link = ({ text, href, color }: LinkProps) => {
 	const isExternal = href.startsWith("http");
 
 	const style = {
 		...(color && { "--link-color": color }),
-		...(hoverColor && { "--link-hover-color": hoverColor }),
-		...(activeColor && { "--link-active-color": activeColor }),
 	} as React.CSSProperties;
 
 	if (isExternal) {
