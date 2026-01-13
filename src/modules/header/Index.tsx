@@ -6,6 +6,7 @@ const HeaderContainer = styled("div")`
 	height: 65px;
 	display: flex;
 	justify-content: space-between;
+	padding: var(--padding);
 
 	.header {
 		&__links {
