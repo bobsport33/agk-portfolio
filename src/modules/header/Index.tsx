@@ -1,8 +1,9 @@
 import React from "react";
-import { styled } from "@linaria/react";
+import { styled } from "@pigment-css/react";
 import Link from "@/components/Link/Index";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled("div")`
+	height: 65px;
 	display: flex;
 	justify-content: space-between;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@linaria/react";
+import { styled } from "@pigment-css/react";
 import NextLink from "next/link";
 
 interface LinkProps {
@@ -11,8 +11,8 @@ interface LinkProps {
 	activeColor?: string;
 }
 
-const StyledLink = styled.a`
-	--link-color: #0055ff;
+const StyledLink = styled(NextLink)`
+	--link-color: var(--secondary);
 	--link-hover-color: #003bbd;
 	--link-active-color: #002a8f;
 
@@ -41,21 +41,21 @@ const Link = ({ text, href, color, hoverColor, activeColor }: LinkProps) => {
 
 	if (isExternal) {
 		return (
-			<StyledLink
+			<a
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
 				style={style}
 			>
 				{text}
-			</StyledLink>
+			</a>
 		);
 	}
 
 	return (
-		<NextLink href={href}>
-			<StyledLink style={style}>{text}</StyledLink>
-		</NextLink>
+		<StyledLink href={href} style={style}>
+			{text}
+		</StyledLink>
 	);
 };
 
